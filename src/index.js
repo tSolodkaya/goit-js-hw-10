@@ -45,23 +45,23 @@ function onInput(event) {
 }
 
 function renderMarkupCountryInfo(dataForMarkup) {
-  dataForMarkup.map(country => {
-    const lang = Object.values(country.languages).join(', ');
-    countryInfo.innerHTML = ` <div class="country-name-official"><img class="flag" src="${country.flags.svg}" width = 80>
-    <p> ${country.name.official}</p></div>
-      <p class="capital"><span>Country capital:</span> ${country.capital[0]}</p>
-      <p class="population"><span>Population:</span> ${country.population}</p>
+  dataForMarkup.map(({ flags, name, capital, population, languages }) => {
+    const lang = Object.values(languages).join(', ');
+    countryInfo.innerHTML = ` <div class="country-name-official"><img class="flag" src="${flags.svg}"  alt="${flags.alt}" width = 80>
+    <p> ${name.official}</p></div>
+      <p class="capital"><span>Country capital:</span> ${capital[0]}</p>
+      <p class="population"><span>Population:</span> ${population}</p>
       <p class="languages"><span>Languages:</span> ${lang}</p>`;
   });
 }
 
 function renderMarkupCountryList(dataForMarkup) {
-  dataForMarkup.map(country => {
+  dataForMarkup.map(({ flags, name }) => {
     countryList.insertAdjacentHTML(
       'afterbegin',
       `
-    <li><img src="${country.flags.svg}" width = 80>
-    <p class="country-name">${country.name.official}</p><li>
+    <li><img src="${flags.svg}" width = 80>
+    <p class="country-name">${name.official}</p><li>
    `
     );
   });
